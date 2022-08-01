@@ -4,7 +4,7 @@ print('hello world')
 
 
 class Place(models.Model):
-    title = models.CharField(max_length=200)
+    title = models.CharField(max_length=200, primary_key=True)
     description_short = models.TextField('Краткое описание')
     description_long = models.TextField('Подробное описание')
     lat = models.FloatField('Широта')
@@ -12,3 +12,18 @@ class Place(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Image(models.Model):
+    priority = models.CharField(max_length=1)
+    title = models.CharField(max_length=200)
+    photo = models.ImageField('Фото')
+    location = models.ForeignKey(
+        Place,
+        on_delete=models.CASCADE,
+        verbose_name='Локация',
+        related_name='location_photo'
+    )
+    def __str__(self):
+        return self.title
+
