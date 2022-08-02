@@ -2,5 +2,8 @@ from django.contrib import admin
 from .models import Place, Image
 
 admin.site.register(Place)
-admin.site.register(Image)
 # Register your models here.
+
+@admin.register(Image)
+class ClaimAdmin(admin.ModelAdmin):
+    list_display = ['priority', 'title']
