@@ -4,6 +4,7 @@ print('hello world')
 
 
 class Place(models.Model):
+    id = models.CharField(max_length=5)
     title = models.CharField(max_length=200, primary_key=True)
     description_short = models.TextField('Краткое описание')
     description_long = models.TextField('Подробное описание')

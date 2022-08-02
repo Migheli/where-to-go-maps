@@ -1,5 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from places.models import Place
+from django.http import Http404
+from django.http import HttpResponse
+from django.template import loader
 
 # Create your views here.
 
@@ -15,7 +18,7 @@ def show_main_page(request):
             },
             "properties": {
                 "title": place.title,
-                "placeId": 'test_id',
+                "placeId": place.id,
                 "detailsUrl": "details_url_test"
             }
         }
@@ -34,3 +37,14 @@ def show_main_page(request):
             'places_to_show': places_to_show
         }
     )
+
+
+def show_place_detail(request, place_id):
+    place = get_object_or_404(Place, id=place_id)
+    place_title = place.title
+    template = loader.get_template('place_detail.html')
+    context = {'place_title': place_title}
+    rendered_page = template.render(context, request)
+    return HttpResponse(rendered_page)
+
+
