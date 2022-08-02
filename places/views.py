@@ -1,39 +1,32 @@
 from django.shortcuts import render
+from places.models import Place
 
 # Create your views here.
 
 def show_main_page(request):
+    places = Place.objects.all()
+    serialized_places=[]
+    for place in places:
+        serialized_place = {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [place.lon, place.lat]
+            },
+            "properties": {
+                "title": place.title,
+                "placeId": 'test_id',
+                "detailsUrl": "details_url_test"
+            }
+        }
+        serialized_places.append(serialized_place)
+
 
     places_to_show = {
         "type": "FeatureCollection",
-        "features": [
-            {
-                "type": "Feature",
-                "geometry": {
-                    "type": "Point",
-                    "coordinates": [37.62, 55.793676]
-                },
-                "properties": {
-                    "title": "«Легенды Москвы",
-                    "placeId": "moscow_legends",
-                    "detailsUrl": "https://raw.githubusercontent.com/devmanorg/where-to-go-frontend/master/places/moscow_legends.json"
-                }
-            },
-            {
-                "type": "Feature",
-                "geometry": {
-                    "type": "Point",
-                    "coordinates": [37.64, 55.753676]
-                },
-                "properties": {
-                    "title": "Крыши24.рф",
-                    "placeId": "roofs24",
-                    "detailsUrl": "https://raw.githubusercontent.com/devmanorg/where-to-go-frontend/master/places/roofs24.json"
-                }
-            }
-        ]
+        "features": serialized_places
     }
-
+    print(places_to_show)
     return render(
         request,
         'index.html',
