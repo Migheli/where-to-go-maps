@@ -43,7 +43,9 @@ def show_place_detail(request, place_id):
     print(place)
 
     place_title = place.title
-    images = Image.objects.all()
+
+    images = Image.objects.select_related('location')
+    print(f'ИМЭДЖИ ---> {images}')
     related_images_urls = []
     for image in images:
         related_images_urls.append(image.photo.url)
