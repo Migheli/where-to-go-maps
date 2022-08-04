@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
-from places.models import Place
+from places.models import Place, Image
 from django.http import Http404
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.template import loader
 
 # Create your views here.
@@ -19,11 +19,10 @@ def show_main_page(request):
             "properties": {
                 "title": place.title,
                 "placeId": place.id,
-                "detailsUrl": "details_url_test"
+                "detailsUrl": f'places/{place.id}'
             }
         }
         serialized_places.append(serialized_place)
-
 
     places_to_show = {
         "type": "FeatureCollection",
@@ -41,10 +40,30 @@ def show_main_page(request):
 
 def show_place_detail(request, place_id):
     place = get_object_or_404(Place, id=place_id)
+    print(place)
+
     place_title = place.title
-    template = loader.get_template('place_detail.html')
-    context = {'place_title': place_title}
-    rendered_page = template.render(context, request)
-    return HttpResponse(rendered_page)
+    images = Image.objects.all()
+    related_images_urls = []
+    for image in images:
+        related_images_urls.append(image.photo.url)
+        print(image.photo.url)
 
 
+    description_short = place.description_short
+    description_long = place.description_long
+    lng, lat = place.lon, place.lat
+
+    serialized_place = {
+        "title": place_title,
+        "imgs": related_images_urls,
+        "description_short": place.description_short,
+        "description_long": place.description_long,
+        "coordinates": {
+            "lng": lng,
+            "lat": lat
+       }
+    }
+    print(serialized_place)
+
+    return JsonResponse(serialized_place)
