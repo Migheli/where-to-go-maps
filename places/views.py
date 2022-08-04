@@ -39,14 +39,19 @@ def show_main_page(request):
 
 
 def show_place_detail(request, place_id):
-    place = get_object_or_404(Place, id=place_id)
+    place = get_object_or_404(Place, id=place_id) #сюда сразу передавать select_related
     print(place)
 
     place_title = place.title
+    images = Image.objects.filter(location=place)
 
-    images = Image.objects.select_related('location')
     print(f'ИМЭДЖИ ---> {images}')
     related_images_urls = []
+    '''
+    location_photos = []
+    for place in Place.objects.filter(id=place.id).select_related('location_photo'):
+        location_photos.append(place.location_photo)
+    '''
     for image in images:
         related_images_urls.append(image.photo.url)
         print(image.photo.url)
