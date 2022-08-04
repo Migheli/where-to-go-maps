@@ -6,27 +6,22 @@ from django.utils.html import format_html, mark_safe
 class ImagesInline(admin.TabularInline):
     model = Image
 
-    fields = ('photo', 'preview_image', 'priority')
+    fields = ('photo', 'get_preview_image', 'priority')
 
-    readonly_fields = ['preview_image']
+    readonly_fields = ['get_preview_image']
+    list_display = ['priority', 'get_preview_image', 'title']
 
-    def preview_image(self, obj):
-        url = obj.url
+    def get_preview_image(self, obj):
+        url = obj.photo.url
         width = '50'
-        height = '50'
-        # string = f'<img src="{url}" width="{width}" height={height} />'
-        # print(f'СТРИНГ ---> {string}')
-        return format_html("{} <b>{}</b> {}", mark_safe(
-            '<img src="{url}" width="{width}" height={height} />'.format(
-                url=url,
-                width=width,
-                height=height,
-            )
-        )
+        height = '200'
+        return format_html('<img src="{}" width="{}" height={} />',
+                           url,
+                           'auto',
+                           height
                            )
 
-
-    preview_image.short_description = 'Предпросмотр'
+    get_preview_image.short_description = 'Предпросмотр'
 
 
 
@@ -37,24 +32,9 @@ class ClaimAdmin(admin.ModelAdmin):
             ImagesInline,
         ]
 
+
 @admin.register(Image)
 class ClaimAdmin(admin.ModelAdmin):
-    list_display = ['priority', 'preview_image', 'title']
-
-    def preview_image(self, obj):
-        url = obj.photo.url
-        width = '50'
-        height = '50'
-        # string = f'<img src="{url}" width="{width}" height={height} />'
-        # print(f'СТРИНГ ---> {string}')
-        return format_html("{} <b>{}</b> {}", mark_safe(
-            '<img src="{url}" width="{width}" height={height} />'.format(
-                url=url,
-                width=width,
-                height=height,
-            )
-        )
-                           )
-
-    preview_image.short_description = 'Предпросмотр'
+    #readonly_fields = ['get_preview_image']
+    list_display = ['priority', 'title']
 
