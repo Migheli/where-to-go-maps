@@ -16,7 +16,11 @@ class Place(models.Model):
 
 
 class Image(models.Model):
-    priority = models.CharField(max_length=1)
+    inline_customizable_order = models.PositiveIntegerField(
+        default=0,
+        blank=False,
+        null=False,
+    )
     title = models.CharField(max_length=200)
     photo = models.ImageField('Фото', upload_to='media')
     location = models.ForeignKey(
@@ -25,9 +29,13 @@ class Image(models.Model):
         verbose_name='Локация',
         related_name='location_photo'
     )
+
+
+    class Meta:
+        ordering = ['inline_customizable_order']
+
     def __str__(self):
         return self.title
 
-    class Meta:
-        ordering = ['priority']
+
 

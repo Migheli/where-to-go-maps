@@ -1,15 +1,18 @@
 from django.contrib import admin
 from .models import Place, Image
-from django.utils.html import format_html, mark_safe
+from django.utils.html import format_html
+from django.contrib import admin
+from adminsortable2.admin import SortableAdminMixin
+from adminsortable2.admin import SortableStackedInline, SortableTabularInline
+from adminsortable2.admin import SortableAdminBase
 
 
-class ImagesInline(admin.TabularInline):
+class ImagesSortableInline(SortableTabularInline):
     model = Image
 
-    fields = ('photo', 'get_preview_image', 'priority')
+    fields = ['photo', 'get_preview_image']
 
     readonly_fields = ['get_preview_image']
-    list_display = ['priority', 'get_preview_image', 'title']
 
     def get_preview_image(self, obj):
         url = obj.photo.url
@@ -24,17 +27,16 @@ class ImagesInline(admin.TabularInline):
     get_preview_image.short_description = 'Предпросмотр'
 
 
-
 @admin.register(Place)
-class ClaimAdmin(admin.ModelAdmin):
+class ClaimAdmin(SortableAdminBase, admin.ModelAdmin):
 
     inlines = [
-            ImagesInline,
+            ImagesSortableInline,
         ]
 
 
 @admin.register(Image)
-class ClaimAdmin(admin.ModelAdmin):
-    #readonly_fields = ['get_preview_image']
-    list_display = ['priority', 'title']
+class ImageAdmin(SortableAdminMixin, admin.ModelAdmin):
+    list_display = ['inline_customizable_order', 'title']
+
 
