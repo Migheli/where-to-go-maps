@@ -156,7 +156,6 @@ cython_debug/
 *.html
 *.css
 *.js
-
 *.pyc
 *.sqlite3
 media

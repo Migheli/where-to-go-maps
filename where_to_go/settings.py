@@ -63,7 +63,7 @@ ROOT_URLCONF = 'where_to_go.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [os.getenv('TEMPLATE_DIR')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -86,7 +86,7 @@ WSGI_APPLICATION = 'where_to_go.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': os.getenv('DEFAULT_DB_ENGINE'),
-        'NAME': BASE_DIR / os.getenv('DEFAULT_DB_NAME'),
+        'NAME': os.getenv('DEFAULT_DB_NAME'),
     }
 }
 
@@ -121,22 +121,20 @@ USE_I18N = os.getenv('USE_I18N', 'true').lower() in ['yes', '1', 'true']
 
 USE_TZ = os.getenv('USE_TZ', 'true').lower() in ['yes', '1', 'true']
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 MEDIA_URL = os.getenv('MEDIA_URL')
 
-MEDIA_ROOT = os.path.join(BASE_DIR, os.getenv('MEDIA_ROOT'))
+MEDIA_ROOT = os.getenv('MEDIA_ROOT')
 
 STATIC_URL = os.getenv('STATIC_URL')
 
+STATIC_ROOT = os.getenv('STATIC_ROOT')
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, os.getenv('STATICFILE_DIR')),
-#    os.path.join(BASE_DIR, "where_to_go/static/")
+    os.getenv('STATICFILE_DIR'),
 ]
-#STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
