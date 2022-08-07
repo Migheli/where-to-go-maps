@@ -20,7 +20,7 @@ class Place(models.Model):
 
 
 class Image(models.Model):
-    inline_customizable_order = models.PositiveIntegerField(
+    inline_customizable_priority = models.PositiveIntegerField(
         default=0,
         blank=False,
         null=False,
@@ -37,8 +37,7 @@ class Image(models.Model):
 
 
     class Meta:
-        ordering = ['inline_customizable_order']
+        ordering = ['inline_customizable_priority']
 
     def __str__(self):
         return self.title
-
