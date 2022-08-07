@@ -24,9 +24,7 @@ class Command(BaseCommand):
                 lon=place_dataset['coordinates']['lng'],
                 lat=place_dataset['coordinates']['lat'],
             )
-            target_place.save()
             related_images = []
-
             for img_number, img_url in enumerate(place_dataset['imgs'], 1):
                 image = requests.get(img_url)
                 image_binary_content = BytesIO(image.content).read()
@@ -41,6 +39,6 @@ class Command(BaseCommand):
                     save=False)
 
                 related_images.append(current_image)
-            current_place_images = Image.objects.bulk_create(related_images)
+            Image.objects.bulk_create(related_images)
 
             target_place.save()
