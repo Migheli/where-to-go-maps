@@ -26,7 +26,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.show_main_page),
-    path('places/<int:place_id>', views.show_place_detail),
+    path('places/<str:place_title>', views.show_place_detail),
     path('tinymce/', include('tinymce.urls')),
     path('__debug__/', include('debug_toolbar.urls')),
 

@@ -19,7 +19,7 @@ def show_main_page(request):
             "properties": {
                 "title": place.title,
                 "placeId": place.id,
-                "detailsUrl": f'places/{place.id}'
+                "detailsUrl": f'places/{place.title}'
             }
         }
         serialized_places.append(serialized_place)
@@ -38,8 +38,8 @@ def show_main_page(request):
     )
 
 
-def show_place_detail(request, place_id):
-    place = get_object_or_404(Place, id=place_id) #сюда сразу передавать select_related
+def show_place_detail(request, place_title):
+    place = get_object_or_404(Place, title=place_title) #сюда сразу передавать select_related
     print(place)
 
     place_title = place.title
