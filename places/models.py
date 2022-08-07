@@ -24,6 +24,7 @@ class Image(models.Model):
         default=0,
         blank=False,
         null=False,
+        verbose_name='Приоритет при отображении'
     )
     title = models.CharField(max_length=200)
     photo = models.ImageField('Фото', upload_to='media')
@@ -40,6 +41,4 @@ class Image(models.Model):
 
     def __str__(self):
         return self.title
-
-
 

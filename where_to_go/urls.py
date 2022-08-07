@@ -28,4 +28,6 @@ urlpatterns = [
     path('', views.show_main_page),
     path('places/<int:place_id>', views.show_place_detail),
     path('tinymce/', include('tinymce.urls')),
+    path('__debug__/', include('debug_toolbar.urls')),
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
