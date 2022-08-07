@@ -18,7 +18,7 @@ def show_main_page(request):
             },
             "properties": {
                 "title": place.title,
-                "placeId": place.id,
+                "placeId": place.title,
                 "detailsUrl": f'places/{place.title}'
             }
         }

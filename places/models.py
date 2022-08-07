@@ -8,8 +8,7 @@ print('hello world')
 
 
 class Place(models.Model):
-    id = models.CharField(max_length=5)
-    title = models.CharField(max_length=200, primary_key=True)
+    title = models.CharField('Название локации', max_length=200, primary_key=True)
     description_short = models.TextField('Краткое описание')
     description_long = HTMLField('Подробное описание')
     lat = models.FloatField('Широта')
@@ -26,7 +25,7 @@ class Image(models.Model):
         null=False,
         verbose_name='Приоритет при отображении'
     )
-    title = models.CharField(max_length=200)
+    title = models.CharField('Название файла', max_length=200)
     photo = models.ImageField('Фото', upload_to='media')
     location = models.ForeignKey(
         Place,
@@ -34,8 +33,6 @@ class Image(models.Model):
         verbose_name='Локация',
         related_name='location_photo'
     )
-
-
     class Meta:
         ordering = ['inline_customizable_priority']
 

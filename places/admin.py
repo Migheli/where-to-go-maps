@@ -8,23 +8,20 @@ from adminsortable2.admin import SortableAdminBase
 
 
 class ImagesSortableInline(SortableTabularInline):
+
     model = Image
-
     fields = ['photo', 'get_preview_image']
-
     readonly_fields = ['get_preview_image']
-
+    
     def get_preview_image(self, obj):
         url = obj.photo.url
-        url = obj.photo.url
-        width = '50'
         height = '200'
-        return format_html('<img src="{}" width="{}" height={} />',
-                           url,
-                           'auto',
-                           height
-                           )
-
+        return format_html(
+            '<img src="{}" width="{}" height={} />',
+            url,
+            'auto',
+            height
+        )
     get_preview_image.short_description = 'Предпросмотр'
 
 
@@ -32,12 +29,28 @@ class ImagesSortableInline(SortableTabularInline):
 class ClaimAdmin(SortableAdminBase, admin.ModelAdmin):
 
     inlines = [
-            ImagesSortableInline,
-        ]
+        ImagesSortableInline,
+    ]
 
 
 @admin.register(Image)
 class ImageAdmin(SortableAdminMixin, admin.ModelAdmin):
-    list_display = ['inline_customizable_priority', 'title']
+    list_display = [
+        'inline_customizable_priority',
+        'get_preview_image',
+        'title'
+    ]
+    readonly_fields = ['get_preview_image']
+
+    def get_preview_image(self, obj):
+        url = obj.photo.url
+        height = '200'
+        return format_html(
+            '<img src="{}" width="{}" height={} />',
+            url,
+            'auto',
+            height
+        )
+    get_preview_image.short_description = 'Предпросмотр'
 
 
