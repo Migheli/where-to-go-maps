@@ -14,6 +14,10 @@ class Place(models.Model):
     lat = models.FloatField('Широта')
     lon = models.FloatField('Долгота')
 
+    class Meta:
+        verbose_name = 'Локация'
+        verbose_name_plural = 'Локации'
+
     def __str__(self):
         return self.title
 
@@ -35,6 +39,8 @@ class Image(models.Model):
     )
     class Meta:
         ordering = ['inline_customizable_priority']
+        verbose_name = 'Изображение'
+        verbose_name_plural = 'Изображения'
 
     def __str__(self):
         return self.title

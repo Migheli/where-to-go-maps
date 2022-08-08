@@ -12,7 +12,7 @@ class ImagesSortableInline(SortableTabularInline):
     model = Image
     fields = ['photo', 'get_preview_image']
     readonly_fields = ['get_preview_image']
-    
+
     def get_preview_image(self, obj):
         url = obj.photo.url
         height = '200'
