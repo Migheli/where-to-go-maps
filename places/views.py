@@ -28,7 +28,7 @@ def show_main_page(request):
         "type": "FeatureCollection",
         "features": serialized_places
     }
-    print(places_to_show)
+
     return render(
         request,
         'index.html',
@@ -40,26 +40,13 @@ def show_main_page(request):
 
 def show_place_detail(request, place_title):
     place = get_object_or_404(Place, title=place_title) #сюда сразу передавать select_related
-    print(place)
-
     place_title = place.title
     images = Image.objects.filter(location=place)
 
-    print(f'ИМЭДЖИ ---> {images}')
     related_images_urls = []
-    '''
-    location_photos = []
-    for place in Place.objects.filter(id=place.id).select_related('location_photo'):
-        location_photos.append(place.location_photo)
-    '''
     for image in images:
         related_images_urls.append(image.photo.url)
         print(image.photo.url)
-
-
-    description_short = place.description_short
-    description_long = place.description_long
-    lng, lat = place.lon, place.lat
 
     serialized_place = {
         "title": place_title,
@@ -67,8 +54,8 @@ def show_place_detail(request, place_title):
         "description_short": place.description_short,
         "description_long": place.description_long,
         "coordinates": {
-            "lng": lng,
-            "lat": lat
+            "lng": place.lon,
+            "lat": place.lat
        }
     }
     print(serialized_place)
