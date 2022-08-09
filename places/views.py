@@ -1,10 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from places.models import Place, Image
-from django.http import Http404
-from django.http import HttpResponse, JsonResponse
-from django.template import loader
+from django.http import JsonResponse
 
-# Create your views here.
 
 def show_main_page(request):
     places = Place.objects.all()
