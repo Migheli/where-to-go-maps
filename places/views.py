@@ -40,7 +40,6 @@ def show_main_page(request):
 
 def show_place_detail(request, place_title):
     place = get_object_or_404(Place, title=place_title) #сюда сразу передавать select_related
-    place_title = place.title
     images = Image.objects.filter(location=place)
 
     related_images_urls = []
@@ -49,7 +48,7 @@ def show_place_detail(request, place_title):
         print(image.photo.url)
 
     serialized_place = {
-        "title": place_title,
+        "title": place.title,
         "imgs": related_images_urls,
         "description_short": place.description_short,
         "description_long": place.description_long,
@@ -58,6 +57,4 @@ def show_place_detail(request, place_title):
             "lat": place.lat
        }
     }
-    print(serialized_place)
-
     return JsonResponse(serialized_place)
