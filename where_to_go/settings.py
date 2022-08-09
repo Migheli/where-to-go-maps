@@ -51,12 +51,10 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-    "debug_toolbar.middleware.DebugToolbarMiddleware",
-
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-
 ]
 
 ROOT_URLCONF = 'where_to_go.urls'
@@ -81,7 +79,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'where_to_go.wsgi.application'
 
 
-# DatabaDatabase
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
