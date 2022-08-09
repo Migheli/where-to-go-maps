@@ -119,7 +119,7 @@ STATIC_ROOT='PATH_TO_STATIC_ROOT'
 
 Внизу справа на странице можно включить отладочный режим логгирования.
 
-![debug mode](.gitbook/assets/debug-option.png)
+![debug mode](https://github.com/devmanorg/where-to-go-frontend/blob/master/.gitbook/assets/debug-option.png?raw=true)
 
 Настройки сохраняются в Local Storage браузера и не пропадают после обновления страницы. Чтобы сбросить настройки удалите ключи из Local Storage с помощью Chrome Dev Tools —&gt; Вкладка Application —&gt; Local Storage.
 
