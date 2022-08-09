@@ -1,7 +1,7 @@
 # Куда пойти — Москва глазами Артёма
 Проект на Django для будущего сайта о самых интересных местах в Москве. Авторский проект Артёма.
 
-![&#x41A;&#x443;&#x434;&#x430; &#x43F;&#x43E;&#x439;&#x442;&#x438;](.gitbook/assets/site.png)
+![&#x41A;&#x443;&#x434;&#x430; &#x43F;&#x43E;&#x439;&#x442;&#x438;](https://github.com/devmanorg/where-to-go-frontend/blob/master/.gitbook/assets/site.png?raw=true)
 
 [Демка сайта](https://migheli.pythonanywhere.com).
 
