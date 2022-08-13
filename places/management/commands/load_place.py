@@ -1,10 +1,11 @@
-from django.core.management.base import BaseCommand, CommandError
+from django.core.management.base import BaseCommand
 from places.models import Place, Image
 from django.core.files.base import ContentFile
 from io import BytesIO
 import requests
 import json
 import os
+
 
 class Command(BaseCommand):
     help = 'Creating or update a place model from JSON-file'
@@ -18,7 +19,7 @@ class Command(BaseCommand):
                 if not file.endswith(".json"):
                     continue
                 with open(os.path.join(root, file), encoding="utf8") as place_file:
-                        place_dataset = json.load(place_file)
+                    place_dataset = json.load(place_file)
 
                 place, created = Place.objects.get_or_create(
                     title=place_dataset['title'],

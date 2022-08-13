@@ -1,10 +1,7 @@
 from django.db import models
 from tinymce.models import HTMLField
 
-
-print('hello world')
-# Create your models here.
-
+# Create your models here
 
 
 class Place(models.Model):
@@ -37,6 +34,7 @@ class Image(models.Model):
         verbose_name='Локация',
         related_name='location_photo'
     )
+
     class Meta:
         ordering = ['inline_customizable_priority']
         verbose_name = 'Изображение'

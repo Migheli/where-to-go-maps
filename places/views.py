@@ -5,7 +5,7 @@ from django.http import JsonResponse
 
 def show_main_page(request):
     places = Place.objects.all()
-    serialized_places=[]
+    serialized_places = []
     for place in places:
         serialized_place = {
             "type": "Feature",
@@ -36,7 +36,7 @@ def show_main_page(request):
 
 
 def show_place_detail(request, place_title):
-    place = get_object_or_404(Place, title=place_title) #сюда сразу передавать select_related
+    place = get_object_or_404(Place, title=place_title)
     images = Image.objects.filter(location=place)
 
     related_images_urls = []
@@ -52,6 +52,6 @@ def show_place_detail(request, place_title):
         "coordinates": {
             "lng": place.lon,
             "lat": place.lat
-       }
+        }
     }
     return JsonResponse(serialized_place)
