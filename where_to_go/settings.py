@@ -111,9 +111,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
-LANGUAGE_CODE = os.getenv('LANGUAGE_CODE')
+LANGUAGE_CODE = 'ru-ru'
 
-TIME_ZONE = os.getenv('TIME_ZONE')
+TIME_ZONE = 'Europe/Moscow'
 
 USE_I18N = os.getenv('USE_I18N', 'true').lower() in ['yes', '1', 'true']
 
@@ -122,17 +122,18 @@ USE_TZ = os.getenv('USE_TZ', 'true').lower() in ['yes', '1', 'true']
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-MEDIA_URL = os.getenv('MEDIA_URL')
+MEDIA_URL = '/media/'
 
-MEDIA_ROOT = os.getenv('MEDIA_ROOT')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-STATIC_URL = os.getenv('STATIC_URL')
+STATIC_URL = '/static/'
 
-STATIC_ROOT = os.getenv('STATIC_ROOT')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 STATICFILES_DIRS = [
-    os.getenv('STATICFILE_DIR'),
+    os.path.join(BASE_DIR, 'places')
 ]
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
