@@ -34,7 +34,7 @@ class Command(BaseCommand):
                     image_binary_content = BytesIO(image.content).read()
                     image_content_file = ContentFile(image_binary_content)
                     current_image = Image(
-                        title=f'{img_number} {place.title}',
+                        title=f'{place.title}{img_number} ',
                         location=place,
                     )
                     current_image.photo.save(

@@ -16,7 +16,7 @@ def show_main_page(request):
             "properties": {
                 "title": place.title,
                 "placeId": place.id,
-                "detailsUrl": f'places/{place.title}'
+                "detailsUrl": f'places/{place.id}'
             }
         }
         serialized_places.append(serialized_place)
@@ -35,8 +35,8 @@ def show_main_page(request):
     )
 
 
-def show_place_detail(request, place_title):
-    place = get_object_or_404(Place, title=place_title)
+def show_place_detail(request, place_id):
+    place = get_object_or_404(Place, id=place_id)
     images = Image.objects.filter(location=place)
 
     related_images_urls = []
