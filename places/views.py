@@ -42,7 +42,6 @@ def show_place_detail(request, place_title):
     related_images_urls = []
     for image in images:
         related_images_urls.append(image.photo.url)
-        print(image.photo.url)
 
     serialized_place = {
         "title": place.title,
