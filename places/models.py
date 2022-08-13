@@ -21,11 +21,11 @@ class Place(models.Model):
 
 
 class Image(models.Model):
-    inline_customizable_priority = models.PositiveIntegerField(
+    priority = models.PositiveIntegerField(
         default=0,
         blank=False,
         null=False,
-        verbose_name='Приоритет при отображении'
+        verbose_name='Приоритет'
     )
     title = models.CharField('Название файла', max_length=200)
     photo = models.ImageField('Фото', upload_to='media')
@@ -37,7 +37,7 @@ class Image(models.Model):
     )
 
     class Meta:
-        ordering = ['inline_customizable_priority']
+        ordering = ['priority']
         verbose_name = 'Изображение'
         verbose_name_plural = 'Изображения'
 
