@@ -36,7 +36,7 @@ class ClaimAdmin(SortableAdminBase, admin.ModelAdmin):
 @admin.register(Image)
 class ImageAdmin(SortableAdminMixin, admin.ModelAdmin):
     list_display = [
-        'inline_customizable_priority',
+        'priority',
         'get_preview_image',
         'title'
     ]
