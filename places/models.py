@@ -31,7 +31,7 @@ class Image(models.Model):
         Place,
         on_delete=models.CASCADE,
         verbose_name='Локация',
-        related_name='location_photos'
+        related_name='photos'
     )
 
     class Meta:
