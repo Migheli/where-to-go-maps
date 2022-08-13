@@ -23,8 +23,6 @@ class Place(models.Model):
 class Image(models.Model):
     priority = models.PositiveIntegerField(
         default=0,
-        blank=False,
-        null=False,
         verbose_name='Приоритет'
     )
     title = models.CharField('Название файла', max_length=200)
