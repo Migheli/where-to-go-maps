@@ -12,9 +12,11 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 import os
-from dotenv import load_dotenv
+from environs import Env
 
-load_dotenv()
+env = Env()
+env.read_env()
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -22,13 +24,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('SECRET_KEY')
+SECRET_KEY = env.str('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG')
+DEBUG = env.bool('DEBUG', default=True)
 
-ALLOWED_HOSTS = ['127.0.0.1', os.getenv('ALLOWED_HOST')]
-
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS')
 
 # Application definition
 
@@ -59,12 +60,10 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'where_to_go.urls'
 
-
-
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, os.getenv('TEMPLATE_DIR'))],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -85,8 +84,8 @@ WSGI_APPLICATION = 'where_to_go.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': os.getenv('DEFAULT_DB_ENGINE'),
-        'NAME': os.path.join(os.path.join(BASE_DIR, os.getenv('DEFAULT_DB_NAME'))),
+        'ENGINE': env.str('DEFAULT_DB_ENGINE'),
+        'NAME': os.path.join(BASE_DIR, env.str('DEFAULT_DB_NAME')),
     }
 }
 
@@ -113,28 +112,26 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
-LANGUAGE_CODE = 'ru-ru'
+LANGUAGE_CODE = env.str('LANGUAGE_CODE', default='ru-ru')
 
-TIME_ZONE = 'Europe/Moscow'
+TIME_ZONE = env.str('TIME_ZONE', default='Europe/Moscow')
 
-USE_I18N = os.getenv('USE_I18N', 'true').lower() in ['yes', '1', 'true']
+USE_I18N = env.bool('USE_I18N', default='True')
 
-USE_TZ = os.getenv('USE_TZ', 'true').lower() in ['yes', '1', 'true']
+USE_TZ = env.bool('USE_TZ', default='True')
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-MEDIA_URL = '/media/'
+MEDIA_URL = env.str('MEDIA_URL', default='/media/')
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = env.str('MEDIA_ROOT', default=os.path.join(BASE_DIR, 'media'))
 
-STATIC_URL = '/static/'
+STATIC_URL = env.str('STATIC_URL', default='/static/')
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = env.str('STATIC_ROOT', default=os.path.join(BASE_DIR, 'static'))
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'places')
-]
+STATICFILES_DIRS = env.list('STATICFILES_DIRS')
 
 
 # Default primary key field type

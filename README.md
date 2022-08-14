@@ -37,8 +37,6 @@ $ python manage.py load_place 'place_dir'
 Подробнее см. раздел Источники данных.
 Кратко: пример JSON-файла в нужном формате размещен в настоящем репозитории (файл `moscow_legens.json`)
 Скрипт автоматически создаст локацию из загруженных в файл данных.
-
-
 * Запустите тестовый локальный сервер для проверки работоспособности сайта и тестовых данных:
 ```bash
 $ python manage.py runserver
@@ -48,7 +46,6 @@ $ python manage.py runserver
 ранее указанными Вами при создании `superuser` Вы получите доступ в "админку" проекта, где сможете свободно редактировать локации и (или) прилагающиеся к ним фотографии.
 Меню "админки" сайта:
 <img src=https://i.ibb.co/PgySync/2022-08-14-10-05-04.png>
-
 
 После проверки и кастомизации всех настроек можете приступать к размещению Вашего проекта на сервере.
 Подробные инструкции зависят от выбранного Вами способа деплоя.
@@ -62,77 +59,62 @@ https://tutorial.djangogirls.org/ru/deploy/index.html#%D0%BD%D0%B0%D1%81%D1%82%D
 ## Настройки переменных окружения
 
 Перменные ок объявляются в файле .env который должен лежать в основном каталоге проекта.
-Вот описание значений: 
-```Python
-#Секретный ключ Вашего Django-проекта
-SECRET_KEY='YOUR_PROJECT_SECRET_KEY'
-#Булево значение - включение/отключение дебаг-режима. В продакшене должно быть False.
-DEBUG='True'
-#имена хостов/доменов, которые может обслуживать данный Django-сайт. Это мера безопасности для предотвращения HTTP Host header attacks, которые возможны даже при многих, казалось бы, безопасных конфигурациях веб-серверов
-ALLOWED_HOST=''
-#Наименование директории с файлами Template (шаблонами) Вашего проекта, располагающейся в корневом каталоге проекта.
-TEMPLATE_DIR='TEMPLATE_DIRECTORY'
-#Имя используемой по-умолчанию проектом базы данных
-DEFAULT_DB_NAME='PROJECT_DB_NAME'
-#Движок используемой по-умолчанию проектом базы данных
-DEFAULT_DB_ENGINE='PROJECT_DB_ENGINE'
-#Языковой код
-LANGUAGE_CODE='PROJECT_LANGUAGE_CODE'
-#Часовой пояс
-TIME_ZONE='TIME_ZONE'
-#Булево значение, определяющее, должна ли быть включена система перевода Django. Это дает возможность отключить ее для повышения производительности. Если это значение установлено в False, Django сделает некоторые оптимизации, чтобы не загружать механизм перевода.
-USE_I18N='BOOLEAN_TRUE_OR_FALSE'
-#Строка, представляющая часовой пояс для данного соединения с базой данных или None. Этот внутренний параметр настройки DATABASES принимает те же значения, что и общий параметр TIME_ZONE
-USE_TZ='True'
-#URL, который обрабатывает медиа, обслуживаемые из MEDIA_ROOT, используемый для managing stored files.
-MEDIA_URL='URL_TO_HANDLE_MEDIA'
-#Наименование директории (в корнеовом каталоге проекта), в которой будет храниться user-uploaded files.
-MEDIA_ROOT='PATH_TO_MEDIA_DIR'
-#URL, который обрабатывает статические файлы 
-STATIC_URL='URL_TO_HANDLE_STATIC'
-#Строка, содержащая пути к каталогу (каталогам) дополнительных файлов.
-STATICFILE_DIR='PATH_TO_ADDITIONAL_STATIC_DIRS'
-#В зависимости от способа размещения файлов, избранного Вами, может быть несколько значений, ниже приведены условные ссылки, лишь для примера:
-STATICFILES_DIRS = [
-    "/home/special.polls.com/polls/static",
-    "/home/polls.com/polls/static",
-    "/opt/webfiles/common",
-]
-#Для такого примера Вам потребуется прописать settings.py следующим образом и задать соответствующие переменные окружения `ENV_VARIABLE_STATICFILE_DIR1` `ENV_VARIABLE_STATICFILE_DIR2` `ENV_VARIABLE_STATICFILE_DIR3` и так далее:
-STATICFILES_DIRS = [
-    os.getenv('ENV_VARIABLE_STATICFILE_DIR1'),
-    os.getenv('ENV_VARIABLE_STATICFILE_DIR2'),
-    os.getenv('ENV_VARIABLE_STATICFILE_DIR3'),
-]
-#Путь к директории, в которой collectstatic будет собирать статические файлы для развертывания. По существу указывает, откуда на продакшене будут "браться" файлы для проекта.
-STATIC_ROOT='PATH_TO_STATIC_ROOT'
-```
+Вот описание значений:
+* `SECRET_KEY` - секретный ключ проекта 
+https://docs.djangoproject.com/en/4.0/ref/settings/#std-setting-SECRET_KEY
+* `DEBUG` - настройки отладочного режима
+https://docs.djangoproject.com/en/4.0/ref/settings/#std-setting-DEBUG
+* `ALLOWED_HOSTS` - настройки разрешенных хостов
+https://docs.djangoproject.com/en/4.0/ref/settings/#allowed-hosts
+* `DEFAULT_DB_NAME` - имя БД, используемой по-умолчанию
+https://docs.djangoproject.com/en/4.0/ref/settings/#std-setting-DATABASES
+* `DEFAULT_DB_ENGINE` - движок БД, используемой по-умолчанию 
+https://docs.djangoproject.com/en/4.0/ref/settings/#std-setting-DATABASES
+* `LANGUAGE_CODE` - языковой код проекта
+https://docs.djangoproject.com/en/4.0/ref/settings/#std-setting-LANGUAGE_CODE
+* `TIME_ZONE` - часовая зона проекта
+https://docs.djangoproject.com/en/4.0/ref/settings/#std-setting-TIME_ZONE
+* `USE_I18N` - настройки использования перевода проекта
+https://docs.djangoproject.com/en/4.0/ref/settings/#std-setting-USE_I18N
+* `USE_L10N` - настройки локализации форматирования даты.
+https://docs.djangoproject.com/en/4.0/ref/settings/#std-setting-USE_I18N
+* `USE_TZ` - настройки использования часовой зоны
+https://docs.djangoproject.com/en/4.0/ref/settings/#std-setting-USE_TZ
+* `MEDIA_URL` URL, который обрабатывает медиа, обслуживаемые из MEDIA_ROOT, используемый для managing stored files.
+https://docs.djangoproject.com/en/4.0/ref/settings/#std-setting-MEDIA_URL
+* `MEDIA_ROOT` Наименование директории (в корнеовом каталоге проекта), в которой будет храниться user-uploaded files.
+https://docs.djangoproject.com/en/4.0/ref/settings/#std-setting-MEDIA_ROOT
+* `STATIC_URL` URL, который обрабатывает статические файлы 
+https://docs.djangoproject.com/en/4.0/ref/settings/#std-setting-STATIC_URL
+* `STATICFILES_DIRS` директории, содержащие статические файлы
+https://docs.djangoproject.com/en/4.0/ref/settings/#std-setting-STATICFILES_DIRS
+* `STATIC_ROOT='PATH_TO_STATIC_ROOT'`
+Путь к директории, в которой collectstatic будет собирать статические файлы для развертывания. По существу указывает, откуда на продакшене будут "браться" файлы для проекта.
+https://docs.djangoproject.com/en/4.0/ref/settings/#std-setting-STATIC_ROOT
+
 
 В размещенном в репозитории файле `where_to_go/settigns.py` настройки выполнены с использованием переменных окружения, 
 которые Вы можете кастомизировать "под себя".
-Ниже пример заполнения файла .env, который должен располагаться, как указывалось, в корневой папке проекта. 
+Ниже пример заполнения файла `.env`, который должен располагаться, как указывалось, в корневой папке проекта. 
 От Вас потребуется самостотяельно заполнить переменную `SECRET_KEY` - это "ключ" Вашего проекта.
 Остальные настройки уже подготовлены в данном примере для запуска на локальном компьютере в режиме отладки.
-Просто создайте в корневом каталоге файл .env и скопируйте в него следующее содержимое:
+Просто создайте в корневом каталоге файл `.env` и скопируйте в него следующее содержимое:
 
 ```Python
 SECRET_KEY='YOUR_PROJECT_SECRET_KEY'
-DEBUG='True'
-ALLOWED_HOST=''
-TEMPLATE_DIR='templates'
+DEBUG=True
+ALLOWED_HOSTS=127.0.0.1, .pythonanywhere.com
 DEFAULT_DB_ENGINE='django.db.backends.sqlite3'
 DEFAULT_DB_NAME='db.sqlite3'
 LANGUAGE_CODE='ru-ru'
 TIME_ZONE='UTC'
-USE_I18N='True'
-USE_TZ='True'
-MEDIA_URL='/media/'
-MEDIA_ROOT='media'
-STATIC_URL='/static/'
-STATICFILE_DIR='places'
-STATIC_ROOT='static'
+USE_I18N=True
+USE_TZ=True
+STATICFILES_DIRS=places
 ```
-
+Обратите внимание: списки передаются без квадратных скобок `[]`, элементы списка перечисляются через запятую.
+В переменной `ALLOWED_HOSTS` в качестве примера передано сразу несколько значений - локальный адрес: 127.0.0.1 и хост: .pythonanywhere.com.
+При передаче строк указание кавычек - `''` или `""` для заполнения .env файла обязательным не является.
 
 ## Настройки
 
