@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG', 'true').lower() in ['yes', '1', 'true']
+DEBUG = os.getenv('DEBUG')
 
 ALLOWED_HOSTS = ['127.0.0.1', os.getenv('ALLOWED_HOST')]
 
@@ -59,10 +59,12 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'where_to_go.urls'
 
+
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.getenv('TEMPLATE_DIR')],
+        'DIRS': [os.path.join(BASE_DIR, os.getenv('TEMPLATE_DIR'))],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -84,7 +86,7 @@ WSGI_APPLICATION = 'where_to_go.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': os.getenv('DEFAULT_DB_ENGINE'),
-        'NAME': os.getenv('DEFAULT_DB_NAME'),
+        'NAME': os.path.join(os.path.join(BASE_DIR, os.getenv('DEFAULT_DB_NAME'))),
     }
 }
 
