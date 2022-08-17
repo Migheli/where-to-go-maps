@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from places.models import Place, Image
 from django.http import JsonResponse
+from django.urls import reverse
 
 
 def show_main_page(request):
@@ -16,7 +17,7 @@ def show_main_page(request):
             "properties": {
                 "title": place.title,
                 "placeId": place.id,
-                "detailsUrl": f'places/{place.id}'
+                "detailsUrl": reverse(show_place_detail, args=(place.id,))
             }
         }
         serialized_places.append(serialized_place)
