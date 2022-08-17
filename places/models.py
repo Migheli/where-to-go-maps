@@ -1,5 +1,6 @@
 from django.db import models
 from tinymce.models import HTMLField
+from pathlib import Path
 
 # Create your models here
 
@@ -24,7 +25,6 @@ class Image(models.Model):
         default=0,
         verbose_name='Приоритет'
     )
-    title = models.CharField('Название файла', max_length=200)
     photo = models.ImageField('Фото', upload_to='media')
     location = models.ForeignKey(
         Place,
@@ -39,4 +39,4 @@ class Image(models.Model):
         verbose_name_plural = 'Изображения'
 
     def __str__(self):
-        return self.title
+        return Path(self.photo.name).name

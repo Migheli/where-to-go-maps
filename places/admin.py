@@ -38,7 +38,6 @@ class ImageAdmin(SortableAdminMixin, admin.ModelAdmin):
     list_display = [
         'priority',
         'get_preview_image',
-        'title'
     ]
     readonly_fields = ['get_preview_image']
 
