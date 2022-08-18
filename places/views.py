@@ -53,4 +53,4 @@ def show_place_detail(request, place_id):
             "lat": place.lat
         }
     }
-    return JsonResponse(serialized_place)
+    return JsonResponse(serialized_place, json_dumps_params={'ensure_ascii': False})
