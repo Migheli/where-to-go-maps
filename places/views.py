@@ -37,7 +37,7 @@ def show_main_page(request):
 
 def show_place_detail(request, place_id):
     place = get_object_or_404(Place, id=place_id)
-    images = Image.objects.filter(location=place)
+    images = place.photos.all()
 
     related_images_urls = []
     for image in images:
