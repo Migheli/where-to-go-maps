@@ -6,9 +6,8 @@ from django.urls import reverse
 
 def show_main_page(request):
     places = Place.objects.all()
-    serialized_places = []
-    for place in places:
-        serialized_place = {
+    serialized_places = [
+        {
             "type": "Feature",
             "geometry": {
                 "type": "Point",
@@ -19,8 +18,8 @@ def show_main_page(request):
                 "placeId": place.id,
                 "detailsUrl": reverse(show_place_detail, args=(place.id,))
             }
-        }
-        serialized_places.append(serialized_place)
+        } for place in places
+    ]
 
     places_to_show = {
         "type": "FeatureCollection",
