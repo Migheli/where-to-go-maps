@@ -83,7 +83,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/#std-setting-USE_I18N
 https://docs.djangoproject.com/en/4.0/ref/settings/#std-setting-USE_TZ
 * `MEDIA_URL` URL, который обрабатывает медиа, обслуживаемые из MEDIA_ROOT, используемый для managing stored files.
 https://docs.djangoproject.com/en/4.0/ref/settings/#std-setting-MEDIA_URL
-* `MEDIA_ROOT` Наименование директории (в корнеовом каталоге проекта), в которой будет храниться user-uploaded files.
+* `MEDIA_ROOT` Наименование директории (в корневом каталоге проекта), в которой будет храниться user-uploaded files.
 https://docs.djangoproject.com/en/4.0/ref/settings/#std-setting-MEDIA_ROOT
 * `STATIC_URL` URL, который обрабатывает статические файлы 
 https://docs.djangoproject.com/en/4.0/ref/settings/#std-setting-STATIC_URL
@@ -97,7 +97,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/#std-setting-STATIC_ROOT
 В размещенном в репозитории файле `where_to_go/settigns.py` настройки выполнены с использованием переменных окружения, 
 которые Вы можете кастомизировать "под себя".
 Ниже пример заполнения файла `.env`, который должен располагаться, как указывалось, в корневой папке проекта. 
-От Вас потребуется самостотяельно заполнить переменную `SECRET_KEY` - это "ключ" Вашего проекта.
+От Вас потребуется самостоятельно заполнить переменную `SECRET_KEY` - это "ключ" Вашего проекта.
 Остальные настройки уже подготовлены в данном примере для запуска на локальном компьютере в режиме отладки.
 Просто создайте в корневом каталоге файл `.env` и скопируйте в него следующее содержимое:
 
