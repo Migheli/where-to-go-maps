@@ -7,8 +7,8 @@ from pathlib import Path
 
 class Place(models.Model):
     title = models.CharField('Название локации', max_length=200, unique=True)
-    description_short = models.TextField('Краткое описание')
-    description_long = HTMLField('Подробное описание')
+    description_short = models.TextField('Краткое описание', blank=True)
+    description_long = HTMLField('Подробное описание', blank=True)
     lat = models.FloatField('Широта')
     lon = models.FloatField('Долгота')
 
