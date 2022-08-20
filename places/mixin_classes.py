@@ -1,5 +1,6 @@
 from django.utils.html import format_html
 
+
 class ImagePreviewMixin():
 
     def get_preview_image(self, obj):
