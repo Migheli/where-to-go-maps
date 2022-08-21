@@ -45,14 +45,14 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         file_path = options['place_dir'][0]
-        if file_path.startswith('http'):
+        if file_path.startswith(('https://', 'http://',)):
             place_dataset = requests.get(file_path).json()
             update_or_create_place(place_dataset)
         else:
             for root, dirs, files in os.walk(file_path):
                 for file in files:
-                    if not file.endswith(".json"):
+                    if not file.endswith('.json'):
                         continue
-                    with open(os.path.join(root, file), encoding="utf8") as place_file:
+                    with open(os.path.join(root, file), encoding='utf8') as place_file:
                         place_dataset = json.load(place_file)
                         update_or_create_place(place_dataset)
