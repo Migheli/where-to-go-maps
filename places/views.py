@@ -37,11 +37,7 @@ def show_main_page(request):
 
 def show_place_detail(request, place_id):
     place = get_object_or_404(Place, id=place_id)
-    images = place.photos.all()
-
-    related_images_urls = []
-    for image in images:
-        related_images_urls.append(image.photo.url)
+    related_images_urls = [image.photo.url for image in place.photos.all()]
 
     serialized_place = {
         "title": place.title,
