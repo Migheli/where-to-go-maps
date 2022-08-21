@@ -8,6 +8,7 @@ import os
 
 
 def update_or_create_place(place_dataset):
+
     place, created = Place.objects.update_or_create(
         title=place_dataset['title'],
         defaults={
@@ -17,8 +18,10 @@ def update_or_create_place(place_dataset):
             'lat': place_dataset['coordinates']['lat'],
         }
     )
+
     if not created:
         place.photos.all().delete()
+
     related_images = []
     for img_number, img_url in enumerate(place_dataset['imgs'], 1):
         image = requests.get(img_url)
@@ -27,12 +30,14 @@ def update_or_create_place(place_dataset):
         current_image = Image(
             location=place,
         )
+
         current_image.photo.save(
             f'{img_number} {place.title}.jpg',
             image_content_file,
             save=False)
 
         related_images.append(current_image)
+
     Image.objects.bulk_create(related_images)
 
 
