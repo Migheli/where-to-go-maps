@@ -12,11 +12,12 @@ def update_or_create_place(place_dataset):
     place, created = Place.objects.update_or_create(
         title=place_dataset['title'],
         defaults={
-            'description_short': place_dataset['description_short'],
-            'description_long': place_dataset['description_long'],
+            'description_short': place_dataset.get('description_short', ''),
+            'description_long': place_dataset.get('description_long', ''),
             'lon': place_dataset['coordinates']['lng'],
-            'lat': place_dataset['coordinates']['lat'],
+            'lat': place_dataset['coordinates']['lat']
         }
+
     )
 
     if not created:
@@ -49,15 +50,14 @@ class Command(BaseCommand):
         if file_path.startswith(('https://', 'http://',)):
             place_datasets = [requests.get(file_path).json() for file_path in file_path.split()]
         else:
+            place_datasets = []
             for root, dirs, files in os.walk(file_path):
                 for file in files:
-                    place_datasets = []
                     if not file.endswith('.json'):
                         continue
                     with open(os.path.join(root, file), encoding='utf8') as place_file:
                         place_dataset = json.load(place_file)
-                        place_datasets.append[place_dataset]
+                    place_datasets.append(place_dataset)
 
         for place_dataset in place_datasets:
             update_or_create_place(place_dataset)
-
