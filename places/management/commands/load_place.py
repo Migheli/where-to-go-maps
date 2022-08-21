@@ -26,7 +26,7 @@ def update_or_create_place(place_dataset):
     for img_number, img_url in enumerate(place_dataset['imgs'], 1):
         image = requests.get(img_url)
         image_binary_content = BytesIO(image.content).read()
-        image_content_file = ContentFile(image_binary_content, name= f'{img_number} {place.title}.jpg')
+        image_content_file = ContentFile(image_binary_content, name=f'{img_number} {place.title}.jpg')
         current_image = Image(
             location=place,
             photo=image_content_file
